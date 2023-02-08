@@ -86,6 +86,7 @@ void HeapInsert(char c, huffman_tree_node *t, int freq)
     heap[heapSize].c = c;
     heap[heapSize].t_node = t;
     heap[heapSize].freq = freq;
+    // TODO Sift up the new element (swim/bubble up operation) until the heap property has been reestablished.
 }
 
 /*
