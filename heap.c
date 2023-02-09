@@ -9,7 +9,7 @@ int heapSize;
  *
  **********************************************************************************************/
 /******** INSERT YOUR CODE HERE IF NEEDED ********/
-
+#define TEST
 HeapNode *parent(int n)
 {
     // moves binary representation of int one to the right,
@@ -27,6 +27,8 @@ HeapNode *rChild(int n)
 
 void bubbleUp(int pos)
 {
+    //printf("BubbleUp: %d\n",pos);
+
     // int pos = child pos
     HeapNode temp = *parent(pos);
 
@@ -37,32 +39,44 @@ void bubbleUp(int pos)
         // swapping the child with the parent will bubble it up
         *parent(pos) = heap[pos];
         heap[pos] = temp;
+        bubbleUp(pos >> 1);
     }
 }
 void bubbleDown(int pos)
 {
+    //printf("BubbleDown: %d\n",pos);
+
     // int pos = parent pos
     // this function operates the same as "heapify" (4041)
     HeapNode temp = *parent(pos);
-    if (heap[pos].freq < (*lChild(pos)).freq && heap[pos].freq < (*rChild(pos)).freq)
+    if((pos*2)>heapSize){
+        return; //TODO potential bug here with pos*2+1 availability
+    }
+    
+    if (heap[pos].freq < (*lChild(pos)).freq && heap[pos].freq < (*rChild(pos)).freq){
+        //heapPrint();
         return;
-
+    }
+    //printf("lChildfreq: %d rChildfreq: %d %d\n",(*lChild(pos)).freq,(*rChild(pos)).freq,(*rChild(pos)).freq==0);
     if ((*lChild(pos)).freq < (*rChild(pos)).freq)
     {
+        //printf("LeftChild\n");
         temp = *lChild(pos);
         *lChild(pos) = heap[pos];
         heap[pos] = temp;
+        //heapPrint();
         bubbleDown(pos * 2);
     }
     else
     {
+        //printf("RightChild\n");
         temp = *rChild(pos);
         *rChild(pos) = heap[pos];
         heap[pos] = temp;
+        //heapPrint();
         bubbleDown(pos * 2 + 1);
     }
 }
-// TODO test bubbledown / bubbleup
 
 /*Initialize Heap*/
 void heapInit()
@@ -86,7 +100,11 @@ void HeapInsert(char c, huffman_tree_node *t, int freq)
     heap[heapSize].c = c;
     heap[heapSize].t_node = t;
     heap[heapSize].freq = freq;
+<<<<<<< HEAD
+    bubbleUp(heapSize);
     // TODO Sift up the new element (swim/bubble up operation) until the heap property has been reestablished.
+=======
+>>>>>>> parent of a957421... experimental bubble code added
 }
 
 /*
@@ -100,8 +118,14 @@ void HeapInsert(char c, huffman_tree_node *t, int freq)
  */
 HeapNode DeleteMin()
 {
-
     /******** INSERT YOUR CODE HERE ********/
+    HeapNode returnHead = heap[1];
+    //printf("%c\n",heap[heapSize].c);
+    heap[1]=heap[heapSize];
+    heapSize--;//this leaves the alst heap ndoe stilll there but we wont access it
+    heapPrint();
+    bubbleDown(1);
+    return returnHead;
 }
 
 void heapPrint()
