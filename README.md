@@ -11,3 +11,21 @@ You will implement a subset of steps in the Huffman compression algorithm.
 4. Create a table that maps each characters (8-bit chunks) to a prefix code. The table of encodings is formed by traversing the path from the root of the Huffman tree to each leaf, each root-to-leaf path creates an encoding for the value stored in the leaf. When going left in the tree append a zero to the path; when going right append a one. All characters/encoding bit pairs may be stored in some kind of table or map to facilitate easy retrieval later.
 
 You are responsible for implement the heap in file heap.c; the Huffman tree in file tree.c; as well as the code generation in code.c. 
+
+TO DO LIST:
+
+code.c
+void gen_code(huffman_tree_node *node, int pos)
+Function is used for generating the codes (40 pts)
+
+heap.c
+void HeapInsert(char c, huffman_tree_node *t, int freq)
+HeapNode DeleteMin()
+Functions are using for generating the heap (30 pts)
+
+tree.c
+void build_huffman_tree()
+Function is used for generating the tree (30 pts)
+
+Alex: heap.c both heap generation functions & void gen_code()
+Matthew: tree.c huffman tree generation function & void gen_code()
