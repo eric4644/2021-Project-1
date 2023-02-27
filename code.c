@@ -1,3 +1,7 @@
+//CSCI 2021 Project 1
+//Alex Harvey
+//Matthew Erickson-Cancino
+
 #include "heap.h"
 #include "tree.h"
  
